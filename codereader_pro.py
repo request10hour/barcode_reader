@@ -13,7 +13,7 @@ def decode_barcode(frame, frame_copy):
         x, y, w, h = barcode.rect
         barcode_data = barcode.data.decode('utf-8')
         barcode_type = barcode.type
-        cv2.rectangle(frame_copy, (x, y), (x + w, y + h), (0, 255, 0), 2)
+        cv2.rectangle(frame_copy, (x, y), (x + w, y + h), (255, 0, 255), 2)
         text = f'{barcode_data} ({barcode_type})'
         cv2.putText(frame_copy, text, (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
     return frame_copy
@@ -49,7 +49,7 @@ def zxing_detect(frame, frame_copy, barcode_type):
         if result.format == barcode_type:
             x1, y1 = map(int, str(result.position).split()[0].split('x'))
             x2, y2 = map(int, str(result.position).split()[2].split('x'))
-            cv2.rectangle(frame_copy, (x1, y1), (x2, y2), (0, 255, 0), 2)
+            cv2.rectangle(frame_copy, (x1, y1), (x2, y2), (255, 255, 0), 2)
             text = f'{result.text} ({result.format})'
             cv2.putText(frame_copy, text, (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
     return frame_copy
